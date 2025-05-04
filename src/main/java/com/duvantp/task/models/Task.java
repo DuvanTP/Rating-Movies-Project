@@ -1,6 +1,9 @@
 package com.duvantp.task.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tasks") 
@@ -8,16 +11,17 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank
     @Column(name = "title") 
     private String title;
-
     private String details;
-
     @Column(name = "due_year")
     private Integer dueYear;
-
+    @Min(1)
+    @Max(10)
     private String priority;
+    @Min(1)
+    @Max(10)
     private Integer progress;
 
     // Getters y Setters

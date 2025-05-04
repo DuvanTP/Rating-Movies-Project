@@ -2,6 +2,9 @@ package com.duvantp.task.controllers;
 
 import com.duvantp.task.models.Task;
 import com.duvantp.task.repositories.TaskRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +35,7 @@ public class TaskController {
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
         Task savedTask = taskRepository.save(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
     }
@@ -49,7 +52,7 @@ public class TaskController {
 
     @CrossOrigin
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable long id, @RequestBody Task updatedTask) {
+    public ResponseEntity<Task> updateTask(@Valid @PathVariable long id, @RequestBody Task updatedTask) {
         if (!taskRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
