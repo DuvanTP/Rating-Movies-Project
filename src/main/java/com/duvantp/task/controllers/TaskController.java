@@ -1,27 +1,24 @@
 package com.duvantp.task.controllers;
 
 import com.duvantp.task.models.Task;
-import com.duvantp.task.repositories.TaskRepository;
+import com.duvantp.task.service.TaskService;
 
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin
 public class TaskController {
 
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    @CrossOrigin
     @GetMapping
     public List<Task> getAllTasks(
         @RequestParam(required = false) Integer priority,
@@ -29,64 +26,48 @@ public class TaskController {
         @RequestParam(defaultValue = "id") String sortBy,
         @RequestParam(defaultValue = "asc") String direction
     ) {
-        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Sort sort = Sort.by(sortDirection, sortBy);
-    
-        if (priority != null && dueYear != null) {
-            return taskRepository.findByPriorityAndDueYear(priority, dueYear, sort);
-        } else if (priority != null) {
-            return taskRepository.findByPriority(priority, sort);
-        } else if (dueYear != null) {
-            return taskRepository.findByDueYear(dueYear, sort);
-        } else {
-            return taskRepository.findAll(sort);
-        }
+        return taskService.getAllTasks(priority, dueYear, sortBy, direction);
     }
-    
+
     @GetMapping("/completed")
-        public ResponseEntity<List<Task>> getCompletedTasks() {
-            List<Task> completedTasks = taskRepository.findByCompletedTrue();
-            return ResponseEntity.ok(completedTasks);
-        }
+    public ResponseEntity<List<Task>> getCompletedTasks() {
+        return ResponseEntity.ok(taskService.getCompletedTasks());
+    }
 
-        @GetMapping("/completed=false")
-        public ResponseEntity<List<Task>> getUnCompletedTasks() {
-            List<Task> UncompletedTasks = taskRepository.findByCompletedFalse();
-            return ResponseEntity.ok(UncompletedTasks);
-        }
+    @GetMapping("/completed=false")
+    public ResponseEntity<List<Task>> getUncompletedTasks() {
+        return ResponseEntity.ok(taskService.getUncompletedTasks());
+    }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable long id) {
-        Optional<Task> task = taskRepository.findById(id);
-        return task.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Task> task = taskService.getTaskById(id);
+        return task.map(ResponseEntity::ok)
+                   .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @CrossOrigin
     @PostMapping
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
-        Task savedTask = taskRepository.save(task);
+        Task savedTask = taskService.createTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
     }
 
-    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable long id) {
-        if (!taskRepository.existsById(id)) {
+        if (!taskService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        taskRepository.deleteById(id);
+        taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
     }
 
-    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@Valid @PathVariable long id, @RequestBody Task updatedTask) {
-        if (!taskRepository.existsById(id)) {
+        if (!taskService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         updatedTask.setId(id);
-        Task savedTask = taskRepository.save(updatedTask);
+        Task savedTask = taskService.updateTask(updatedTask);
         return ResponseEntity.ok(savedTask);
     }
 }
