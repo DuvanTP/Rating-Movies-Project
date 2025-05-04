@@ -19,7 +19,7 @@ public class Task {
     private Integer dueYear;
     @Min(1)
     @Max(10)
-    private String priority;
+    private Integer priority;
     @Min(1)
     @Max(10)
     private Integer progress;
@@ -57,11 +57,11 @@ public class Task {
         this.dueYear = dueYear;
     }
 
-    public String getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
 
