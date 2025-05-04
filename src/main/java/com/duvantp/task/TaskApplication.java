@@ -1,13 +1,13 @@
-package com.duvantp.movies;
+package com.duvantp.task;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoviesApplication {
+public class TaskApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoviesApplication.class, args);
+		SpringApplication.run(TaskApplication.class, args);
 	}
 
 }
