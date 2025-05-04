@@ -43,6 +43,17 @@ public class TaskController {
         }
     }
     
+    @GetMapping("/completed")
+        public ResponseEntity<List<Task>> getCompletedTasks() {
+            List<Task> completedTasks = taskRepository.findByCompletedTrue();
+            return ResponseEntity.ok(completedTasks);
+        }
+
+        @GetMapping("/completed=false")
+        public ResponseEntity<List<Task>> getUnCompletedTasks() {
+            List<Task> UncompletedTasks = taskRepository.findByCompletedFalse();
+            return ResponseEntity.ok(UncompletedTasks);
+        }
 
     @CrossOrigin
     @GetMapping("/{id}")

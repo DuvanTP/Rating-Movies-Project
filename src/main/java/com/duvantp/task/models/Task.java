@@ -23,6 +23,8 @@ public class Task {
     @Min(1)
     @Max(10)
     private Integer progress;
+    @Column(nullable = false)
+    private boolean completed = false;
 
     // Getters y Setters
     public Long getId() {
@@ -71,5 +73,13 @@ public class Task {
 
     public void setProgress(Integer progress) {
         this.progress = progress;
+    }
+
+    public boolean getcompleted() {
+        return completed;
+    }
+
+    public void setcompleted(boolean completed) {
+        this.completed = completed;
     }
 }
