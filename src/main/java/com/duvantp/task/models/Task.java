@@ -20,9 +20,9 @@ public class Task {
     @Min(1)
     @Max(10)
     private Integer priority;
-    @Min(1)
+    @Min(0)
     @Max(10)
-    private Integer progress;
+    private Integer progress = 0;
     @Column(nullable = false)
     private boolean completed = false;
 
