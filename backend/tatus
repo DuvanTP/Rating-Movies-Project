@@ -1,0 +1,44 @@
+[33mcommit 551dabe77c05b9209d901e5730ece4249a2d196e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAdding-service-layer[m[33m, [m[1;32mmain[m[33m, [m[1;32mAddig-tag-completed[m[33m)[m
+Author: DuvanTP <duvan.tapias@udea.edu.co>
+Date:   Sun May 4 15:40:31 2025 -0500
+
+    tag added succesfully
+
+[33mcommit c1ccd95b1829e5f377e2e60f1a3306826de7f1ac[m[33m ([m[1;32mAdding-Validations[m[33m)[m
+Author: DuvanTP <duvan.tapias@udea.edu.co>
+Date:   Sun May 4 15:01:48 2025 -0500
+
+    another commit
+
+[33mcommit 9ada759c8675b913173b6de6e9ad1d359b15ccce[m
+Author: DuvanTP <duvan.tapias@udea.edu.co>
+Date:   Sun May 4 14:54:42 2025 -0500
+
+    validations and changes added succesfully
+
+[33mcommit bc4ba9ef22f55a80a2f3f7d0d091df784a5f9bed[m[33m ([m[1;32mtask1[m[33m)[m
+Author: DuvanTP <duvan.tapias@udea.edu.co>
+Date:   Sat May 3 20:39:53 2025 -0500
+
+    modificacion Task Project
+
+[33mcommit 81cf2084f511f8723b92ca3e71568deac35b6a61[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: fabb1c8 72362b3
+Author: DuvanTP <161092690+DuvanTP@users.noreply.github.com>
+Date:   Fri Jun 7 22:36:02 2024 -0500
+
+    Merge pull request #1 from DuvanTP/R1-Adding-project
+    
+    First commit
+
+[33mcommit 72362b3d2c0af3ea4373d9335186524eff25ed1d[m[33m ([m[1;31morigin/R1-Adding-project[m[33m, [m[1;32mR1-Adding-project[m[33m)[m
+Author: DuvanTP <duvan.tapias@udea.edu.co>
+Date:   Fri Jun 7 22:34:15 2024 -0500
+
+    second commit
+
+[33mcommit fabb1c8f21824acf9ae4566c4a8eb2b3a847d3c2[m
+Author: DuvanTP <161092690+DuvanTP@users.noreply.github.com>
+Date:   Fri Jun 7 22:21:34 2024 -0500
+
+    Initial commit
