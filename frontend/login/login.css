@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f6f2;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #e2e2e2;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-button {
+  background-color: #d1d1d1;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-container {
+  background-color: #ffffff;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: #000;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  color: #333;
+}
+
+input[type=\"email\"], input[type=\"password\"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #e1dbd6;
+  border-radius: 5px;
+  background-color: #f9f6f2;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.forgot {
+  font-size: 0.9em;
+  color: #333;
+  text-decoration: none;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #d1d1d1;
+  color: #000;
+  padding: 10px;
+  border: none;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register {
+  text-align: center;
+  margin-top: 15px;
+}

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.duvantp.task.models.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
+    List<Task> findByUserId(Long userId);
     List<Task> findByPriority(Integer priority, Sort sort);
     List<Task> findByDueYear(Integer dueYear, Sort sort);
     List<Task> findByPriorityAndDueYear(Integer priority, Integer dueYear, Sort sort);

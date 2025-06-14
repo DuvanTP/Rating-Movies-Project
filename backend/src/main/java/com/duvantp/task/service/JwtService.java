@@ -9,6 +9,8 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.duvantp.task.models.CustomUserDetails;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -20,9 +22,17 @@ public class JwtService {
 
     private static final String SECRET_KEY = "586E3272357538782F4L3F442847284862506553685668597933733676397924";
     
-    public String getToken(UserDetails user) {
-        return getToken(new HashMap<>(), user);
+    public String getToken(UserDetails userDetails) {
+    Map<String, Object> extraClaims = new HashMap<>();
+
+    if (userDetails instanceof CustomUserDetails) {
+        CustomUserDetails customUser = (CustomUserDetails) userDetails;
+        extraClaims.put("id", customUser.getId());  // Aquí agrega el ID
     }
+
+    return getToken(extraClaims, userDetails);
+}
+
 
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
         return Jwts.builder().setClaims(extraClaims).setSubject(user.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
