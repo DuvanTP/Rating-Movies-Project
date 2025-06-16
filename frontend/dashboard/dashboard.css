@@ -349,3 +349,32 @@ textarea {
   resize: vertical;
 }
 
+/* Estilo por defecto casilla completado */
+.status-dropdown.completed {
+  background-color: #28a745; /* verde */
+}
+
+.status-dropdown.pending {
+  background-color: #e57373; /* rojo claro */
+}
+
+.status-dropdown {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  color: white;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  width: 120px;
+}
+
+.status-dropdown.completed {
+  background-color: #28a745; /* verde */
+}
+
+.status-dropdown.pending {
+  background-color: #e57373; /* rojo claro */
+}
+

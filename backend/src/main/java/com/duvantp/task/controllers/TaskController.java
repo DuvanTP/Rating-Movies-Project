@@ -88,7 +88,9 @@ public class TaskController {
         if (!taskService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
+        User user = userRepo.findById(52L).orElseThrow();
         updatedTask.setId(id);
+        updatedTask.setUser(user);
         Task savedTask = taskService.updateTask(updatedTask);
         return ResponseEntity.ok(savedTask);
     }

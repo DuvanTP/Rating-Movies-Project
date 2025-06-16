@@ -72,7 +72,14 @@ function loadTasks() {
   row.innerHTML = `
         <td>${task.title}</td>
         <td>${task.details}</td>
-        <td>${task.completed ? '✔️ Completada' : '⏳ Pendiente'}</td>
+        <td>
+          <select class="status-dropdown" onchange="updateTaskStatus(${task.id}, this)">
+            <option value="completed" ${task.completed ? 'selected' : ''}>✔️ Completed</option>
+            <option value="pending" ${!task.completed ? 'selected' : ''}>⏳ Pending</option>
+          </select>
+        </td>
+        <tr data-dueyear="${task.dueYear}" data-priority="${task.priority}">
+
         <td>
               <div class="menu-container" onclick="toggleMenu(this)">
               <button class="menu-button">⋮</button>
@@ -87,12 +94,24 @@ function loadTasks() {
 
       tbody.appendChild(row);
     });
+
+    applyStatusStyles(); // aplicar clases de color
+
   })
   .catch(err => {
     console.error("Error al cargar tareas:", err);
   });
 
 };
+
+function applyStatusStyles() {
+  document.querySelectorAll('.status-dropdown').forEach(select => {
+    const value = select.value;
+    select.classList.remove('completed', 'pending');
+    select.classList.add(value);
+  });
+}
+
 
 function toggleMenu(el) {
   // Cierra cualquier otro menú abierto
@@ -112,29 +131,6 @@ document.addEventListener('click', function(e) {
     });
   }
 });
-
-// Renderiza las tareas en la tabla
-/*function displayTasks(tasks) {
-  const tbody = document.querySelector('#task-table tbody');
-  tbody.innerHTML = ''; // Limpia el contenido actual
-
-  // Itera cada tarea y crea una fila (tr) con los datos
-  tasks.forEach(task => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${task.title}</td>
-      <td>${task.description}</td>
-      <td>${task.completed ? 'Completed' : 'Pending'}</td>
-      <td>
-        <button onclick="toggleTaskStatus(${task.id}, ${task.completed})">
-          Mark as ${task.completed ? 'Pending' : 'Completed'}
-        </button>
-        <button onclick="deleteTask(${task.id})">Delete</button>
-      </td>
-    `;
-    tbody.appendChild(tr); // Agrega la fila a la tabla
-  });
-} */
 
 // Actualiza los contadores: total, completadas y pendientes
 function updateCounts(tasks) {
@@ -229,8 +225,6 @@ function createNewTask() {
       priority: parseInt(form.priority.value)
     };
 
-    //const id = 52;
-
     alert("Task created successfully!");
     // llamada a la api
       fetch(`http://localhost:8080/api/tasks/with-user?userId=52`, {
@@ -248,6 +242,32 @@ function createNewTask() {
   }
 }
 
+function updateTaskStatus(taskId, selectElement) {
+  const newStatus = selectElement.value;
+  const completed = newStatus === "completed";
+
+  // Actualizar estilos visuales
+  selectElement.classList.remove("completed", "pending");
+  selectElement.classList.add(newStatus);
+
+  // Llamada a la API para actualizar
+  fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ completed })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to update task status");
+    console.log(`Task ${taskId} updated successfully`);
+  })
+  .catch(err => {
+    alert("Error updating status");
+    console.error(err);
+  });
+}
 
 
 function log_out(){
@@ -259,4 +279,51 @@ function log_out(){
     window.location.href = '../login/login.html'; // redirige al login si quieres
   } 
 }
+
+
+function updateTaskStatus(taskId, selectElement) {
+  // 1. Obtener el valor nuevo del estado
+  const isCompleted = selectElement.value === "completed";
+
+  // 2. Buscar la fila actual y obtener los otros datos visibles
+  const row = selectElement.closest('tr');
+  const title = row.children[0].innerText;
+  const details = row.children[1].innerText;
+
+  const dueYear = parseInt(row.dataset.dueyear);
+  const priority = parseInt(row.dataset.priority);
+
+
+  // 3. Enviar el objeto completo de la tarea con el estado actualizado
+  const updatedTask = {
+    
+    id: taskId,
+    title: title,
+    details: details,
+    completed: isCompleted,
+    dueYear: dueYear,        // ⚠️ Puedes reemplazar con valor real si lo tienes en la tabla
+    priority: priority           // ⚠️ Lo mismo aquí: deberías obtenerlo si lo tienes visualmente
+  };
+
+  fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(updatedTask)
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to update task");
+      return res.json();
+    })
+    .then(() => {
+      applyStatusStyles(); // Vuelve a aplicar estilo según el nuevo estado
+    })
+    .catch(err => {
+      console.error("Error updating task:", err);
+      alert("There was a problem updating the task.");
+    });
+}
+
 
