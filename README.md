@@ -1,40 +1,71 @@
-# Task Manager API
+# Today's Task
 
-Una API REST para la gestión de tareas, desarrollada con **Spring Boot**, **JPA** y **H2/MySQL**. Permite crear, consultar, actualizar, eliminar y filtrar tareas según prioridad, año de vencimiento y estado de completitud. Perfecta para integrarla en aplicaciones web o móviles que necesiten una base sólida para el manejo de tareas.
+A full-stack web application for task management, combining a **pure JavaScript, HTML, and CSS frontend** with a robust **Java + Spring Boot backend**. This app enables users to create, view, filter, update, and delete tasks, and includes **JWT-based authentication**. It uses a lightweight **MySQL database** for data persistence.
 
----
-
-## Características
-
-- Crear tareas con validación.
-- Obtener todas las tareas o filtrarlas por:
-  - Prioridad
-  - Año de vencimiento
-  - Estado de completitud (completadas / no completadas)
-- Ordenamiento personalizado (por campo y dirección).
-- Ver detalles de una tarea por ID.
-- Actualizar tareas existentes.
-- Eliminar tareas.
-- Arquitectura organizada con capas: `Controller`, `Service`, `Repository`.
+🔗 [GitHub Repository – Today's Task](https://github.com/DuvanTP/Task-Project.git)
 
 ---
 
-## Arquitectura
+## 🛠 Project Overview
 
-- **Controller:** Gestiona las peticiones HTTP.
-- **Service:** Contiene la lógica de negocio y coordina con el repositorio.
-- **Repository:** Abstracción de la base de datos usando Spring Data JPA.
-- **Model:** Representa las entidades (en este caso, `Task`).
+**Today's Task** offers a RESTful API for task management, developed with Spring Boot, JPA, and MySQL. The API supports filtering tasks by priority, due year, and completion status, making it ideal for integration with web or mobile applications.
+
+On the frontend, the application is built with **vanilla JavaScript**, **HTML**, and **CSS**, allowing for a lightweight and responsive user interface without external JS frameworks.
+
+---
+
+## 🚀 Features
+
+* **JWT authentication** for secure user sessions.
+* Create tasks with validation.
+* Fetch all tasks or filter by:
+
+  * Priority
+  * Due year
+  * Completion status (completed / pending)
+* Sort tasks dynamically (by any field and direction).
+* View task details by ID.
+* Update existing tasks.
+* Delete tasks.
+* Clean and modular architecture with layered separation.
 
 ---
 
-## Tecnologías
+## 🧱 Architecture
 
-- Java 17+
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- H2 Database (por defecto) o MySQL
-- Maven
+* **Frontend**:
+
+  * Pure JavaScript (Vanilla JS)
+  * HTML5
+  * CSS3
+
+* **Backend (Java)**:
+
+  * `Controller`: Handles HTTP requests.
+  * `Service`: Contains business logic.
+  * `Repository`: Interfaces with the database via Spring Data JPA.
+  * `Model`: Represents the entities (e.g., Task).
 
 ---
+
+## 🧰 Tech Stack
+
+### Backend
+
+* Java 17+
+* Spring Boot
+* Spring Web
+* Spring Data JPA
+* MySQL (or H2 for in-memory testing)
+* JWT (JSON Web Tokens)
+* Maven
+
+### Frontend
+
+* HTML5
+* CSS3
+* Vanilla JavaScript
+
+---
+
+
